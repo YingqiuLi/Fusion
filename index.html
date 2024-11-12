@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fusion</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #83af86;
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 20%;
+        }
+
+        button {
+            background-color: white;
+            color: #83af86;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        button.disabled {
+            background-color: grey;
+            color: white;
+            cursor: not-allowed;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+        }
+
+        .menu {
+            text-align: left;
+            background-color: #ffffff;
+            color: #83af86;
+            padding: 20px;
+            width: 200px;
+            height: 100vh;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .menu h3 {
+            color: #83af86;
+            font-size: 24px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin: 20px 0;
+        }
+
+        ul li a {
+            text-decoration: none;
+            color: #83af86;
+            font-size: 18px;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        ul li a.active {
+            background-color: #83af86;
+            color: white;
+        }
+
+        ul li a:hover {
+            text-decoration: underline;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            padding: 10px;
+            width: 80%;
+            margin: 10px 0;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .content {
+            margin-top: 20px;
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Welcome Page -->
+    <div id="welcome-page" style="display:block;">
+        <h1>Welcome to Fusion</h1>
+        <button onclick="showPage('signup-page')">Signup</button>
+        <button onclick="showPage('login-page')">Login</button>
+    </div>
+
+    <!-- Signup Page -->
+    <div id="signup-page" style="display:none;">
+        <div class="container">
+            <h1>Fusion</h1>
+            <div class="menu">
+                <h3>Account</h3>
+                <ul>
+                    <li><a href="#" onclick="showPage('login-page')">Login</a></li>
+                    <li><a href="#" onclick="showPage('signup-page')" class="active">Signup</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="content">
+            <h2>Signup</h2>
+            <input type="text" placeholder="Enter username">
+            <input type="password" placeholder="Enter password">
+            <input type="password" placeholder="Confirm password">
+        </div>
+        <button onclick="showPage('institution-page')">Log in</button>
+    </div>
+
+    <!-- Login Page -->
+    <div id="login-page" style="display:none;">
+        <div class="container">
+            <h1>Fusion</h1>
+            <div class="menu">
+                <h3>Account</h3>
+                <ul>
+                    <li><a href="#" onclick="showPage('login-page')" class="active">Login</a></li>
+                    <li><a href="#" onclick="showPage('signup-page')">Signup</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="content">
+            <h2>Login</h2>
+            <input type="text" placeholder="Enter username">
+            <input type="password" placeholder="Enter password">
+        </div>
+        <button onclick="showPage('institution-page')">Confirm</button>
+    </div>
+
+    <!-- Institution Selection Page -->
+    <div id="institution-page" style="display:none;">
+        <h2>Select Your Institution</h2>
+        <div class="input-container">
+            <input type="text" id="search-bar" placeholder="Search for your institution..."
+                oninput="filterInstitutions(); resetInstitutionSelection();">
+            <button id="continue-button" class="disabled" disabled onclick="showPage('course-page')">Continue</button>
+        </div>
+        <ul id="institution-list"></ul>
+    </div>
+
+    <!-- Course Selection Page -->
+    <div id="course-page" style="display:none;">
+        <h2>Select Your Course</h2>
+        <div class="input-container">
+            <input type="text" id="course-search-bar" placeholder="Search for your course..."
+                oninput="filterCourses(); resetCourseSelection();">
+        </div>
+        <ul id="course-list"></ul>
+        <h3>Selected Courses:</h3>
+        <ul id="selected-courses-list"></ul>
+        <button id="course-continue-button" class="disabled" disabled>Continue</button>
+    </div>
+
+    <script src="universities.js"></script>
+    <script src="courses.js"></script>
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll("div[id$='page']").forEach(page => {
+                page.style.display = "none";
+            });
+            document.getElementById(pageId).style.display = "block";
+
+            if (pageId === 'institution-page') {
+                populateInstitutions();
+            } else if (pageId === 'course-page') {
+                populateCourses();
+            }
+        }
+    </script>
+</body>
+
+</html>
