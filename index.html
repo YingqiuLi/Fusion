@@ -567,17 +567,25 @@
 
         function sendMessage() {
             const messageInput = document.getElementById('chat-message-input');
-            const message = messageInput.value;
-            if (message.trim()) {
+            const message = messageInput.value.trim();
+
+            if (message) {
                 const chatBox = document.querySelector('.chat-box');
+
+                // Create the new message bubble
                 const messageDiv = document.createElement('div');
                 messageDiv.className = 'chat-message user';
                 messageDiv.innerHTML = `<div class="message-bubble">${message}</div>`;
                 chatBox.appendChild(messageDiv);
+
+                // Clear the input field
                 messageInput.value = '';
+
+                // Scroll to the latest message
                 chatBox.scrollTop = chatBox.scrollHeight;
             }
         }
+
 
         document.getElementById('chat-message-input').addEventListener('keypress', function (event) {
             if (event.key === 'Enter') {
