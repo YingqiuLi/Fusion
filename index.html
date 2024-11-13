@@ -152,10 +152,11 @@
 
             <div class="class-content-wrapper">
                 <div class="course-buttons">
-                    <button class="menu-btn" onclick="showClassContent('class-chat')">Chat</button>
+                    <button class="menu-btn active" onclick="showClassContent('class-chat')">Chat</button>
                     <button class="menu-btn" onclick="showClassContent('class-resource')">Resource</button>
                     <button class="menu-btn" onclick="showClassContent('class-members')">Members</button>
                 </div>
+
 
                 <!-- Chat Content -->
                 <div id="class-chat" style="display:block;">
@@ -201,7 +202,8 @@
                             <img src="photos/xavier.jpg" alt="Xavier" class="chat-profile">
                             <div>
                                 <p class="sender-name">Xavier</p>
-                                <div class="message-bubble">Wait what? I thought we're not doing any assignments for this class. I didn't finish any of them</div>
+                                <div class="message-bubble">Wait what? I thought we're not doing any assignments for
+                                    this class. I didn't finish any of them</div>
                             </div>
                         </div>
 
@@ -217,7 +219,8 @@
                             <img src="photos/david.jpg" alt="David" class="chat-profile">
                             <div>
                                 <p class="sender-name">David</p>
-                                <div class="message-bubble">Maybe the prof can give you makeup assignments. Don't stress upon it!</div>
+                                <div class="message-bubble">Maybe the prof can give you makeup assignments. Don't stress
+                                    upon it!</div>
                             </div>
                         </div>
 
@@ -248,19 +251,131 @@
                                 <div class="message-bubble">When shall we meet?</div>
                             </div>
                         </div>
-
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="chat-message-input" placeholder="Type a message...">
+                        <button onclick="sendMessage()" class="icon-button"><i class="fas fa-paper-plane"></i></button>
                     </div>
                 </div>
 
-                <!-- Other Class Content -->
-                <div id="class-resource" style="display:none;">Resource Page</div>
-                <div id="class-members" style="display:none;">Members Page</div>
+                <!-- Resource Content -->
+                <div id="class-resource" style="display:none;">
+                    <div class="resource-list">
+                        <h3 style="text-align: center;">Course Materials</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>File Name</th>
+                                    <th>Uploaded By</th>
+                                    <th>Category</th>
+                                    <th>Uploaded Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Week 1 Lecture Notes.pdf</td>
+                                    <td>Sarah Kim</td>
+                                    <td>Note</td>
+                                    <td>06/15/2015</td>
+                                </tr>
+                                <tr>
+                                    <td>Midterm Exam Answers2022.pdf</td>
+                                    <td>David Brown</td>
+                                    <td>Answer</td>
+                                    <td>10/25/2022</td>
+                                </tr>
+                                <tr>
+                                    <td>Practice Final Exam.pdf</td>
+                                    <td>Emily Johnson</td>
+                                    <td>Exam</td>
+                                    <td>11/10/2024</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="upload-section" style="position: fixed; bottom: 20px; width: 100%; text-align: center;">
+                        <button class="upload-btn" onclick="openUploadModal()">
+                            <i class="fas fa-upload"></i> Upload
+                        </button>
+                    </div>
+                </div>
+
+                <div id="class-members" style="display:none;">
+                    <div class="resource-list">
+                        <h3 style="text-align: center;">Class Members</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Section</th>
+                                    <th>Role</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Emily Johnson</td>
+                                    <td>2024 Fall- Section 01</td>
+                                    <td>Student</td>
+                                </tr>
+                                <tr>
+                                    <td>Jonathan Smith</td>
+                                    <td>2024 Fall - Section 02</td>
+                                    <td>Student</td>
+                                </tr>
+                                <tr>
+                                    <td>Xavier Williams</td>
+                                    <td>2024 Fall - Section 06</td>
+                                    <td>Student</td>
+                                </tr>
+                                <tr>
+                                    <td>David Brown</td>
+                                    <td>2022 Summer - Section 04</td>
+                                    <td>TA</td>
+                                </tr>
+                                <tr>
+                                    <td>Richard Zhang</td>
+                                    <td>2021 Spring - Section 08</td>
+                                    <td>student</td>
+                                </tr>
+                                <tr>
+                                    <td>Michael Lee</td>
+                                    <td>2018 Fall - Section 01</td>
+                                    <td>Student</td>
+                                </tr>
+                                <tr>
+                                    <td>Sarah Kim</td>
+                                    <td>2015 Spring - Section 03</td>
+                                    <td>TA</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
 
-        <div class="chat-input">
-            <input type="text" id="chat-message-input" placeholder="Type a message...">
-            <button onclick="sendMessage()" class="icon-button"><i class="fas fa-paper-plane"></i></button>
+    <!-- Upload Modal -->
+    <div id="upload-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>Upload File</h3>
+            <div id="drop-area">
+                <p id="drop-area-text">Drag and drop a file here, or click to select a file</p>
+                <input type="file" id="file-input" hidden>
+            </div>
+            <div id="file-name-display" style="display: none;">No file selected</div>
+            <div>
+                <label for="file-category">Choose File Category:</label>
+                <select id="file-category">
+                    <option value="Note">Note</option>
+                    <option value="Answer">Answer</option>
+                    <option value="Exam">Exam</option>
+                </select>
+            </div>
+            <div class="modal-buttons">
+                <button id="confirm-upload">Confirm</button>
+                <button id="cancel-upload" onclick="closeUploadModal()">Cancel</button>
+            </div>
         </div>
     </div>
 
@@ -285,7 +400,7 @@
             }
             if (pageId === 'profile-page') {
                 populateProfile();
-            } else if (pageId === 'home-page' || pageId === 'class-page') {
+            } else if (pageId === 'home-page' || pageId === 'class-page' || pageId === 'resource-page' || pageId === 'members-page') {
                 populateHomeMenu();
             }
         }
@@ -422,13 +537,6 @@
             });
         }
 
-
-        function openClassPage(courseName) {
-            document.getElementById('class-title').innerText = courseName;
-            populateClassMenu();
-            showPage('class-page');
-        }
-
         function populateClassMenu() {
             const classCoursesMenu = document.querySelector('#class-page .menu ul');
             classCoursesMenu.innerHTML = '';
@@ -443,13 +551,19 @@
             });
         }
 
-
         function showClassContent(contentId) {
-            document.querySelectorAll("#class-page > div[id^='class']").forEach(content => {
+            document.querySelectorAll("#class-page > .container > .class-content-wrapper > div[id^='class']").forEach(content => {
                 content.style.display = "none";
             });
             document.getElementById(contentId).style.display = "block";
         }
+
+        function openClassPage(courseName) {
+            document.getElementById('class-title').innerText = courseName;
+            populateClassMenu();
+            showPage('class-page');
+        }
+
 
         function sendMessage() {
             const messageInput = document.getElementById('chat-message-input');
@@ -472,6 +586,103 @@
             }
         });
 
+        function showClassContent(contentId) {
+            document.querySelectorAll("#class-page > .container > .class-content-wrapper > div[id^='class']").forEach(content => {
+                content.style.display = "none";
+            });
+            document.getElementById(contentId).style.display = "block";
+
+            document.querySelectorAll(".course-buttons .menu-btn").forEach(btn => {
+                btn.classList.remove("active");
+            });
+
+            const activeButton = document.querySelector(`.menu-btn[onclick="showClassContent('${contentId}')"]`);
+            if (activeButton) {
+                activeButton.classList.add("active");
+            }
+        }
+
+        const dropArea = document.getElementById('drop-area');
+        const fileInput = document.getElementById('file-input');
+        const fileNameDisplay = document.getElementById('file-name-display');
+        const uploadModal = document.getElementById('upload-modal');
+
+        function openUploadModal() {
+            uploadModal.style.display = 'block';
+        }
+
+        function closeUploadModal() {
+            uploadModal.style.display = 'none';
+            fileInput.value = '';
+            fileNameDisplay.style.display = 'none';
+        }
+
+        // Handle click to trigger file input
+        dropArea.addEventListener('click', () => fileInput.click());
+
+        // Handle dragover event
+        dropArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropArea.style.borderColor = '#5e7e60';
+        });
+
+        // Handle dragleave event
+        dropArea.addEventListener('dragleave', () => {
+            dropArea.style.borderColor = '#83af86';
+        });
+
+        // Handle file drop
+        dropArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            handleFiles(e.dataTransfer.files);
+        });
+
+        fileInput.addEventListener('change', () => handleFiles(fileInput.files));
+
+        function handleFiles(files) {
+            if (files.length > 0) {
+                const file = files[0];
+                const fileName = file.name;
+
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                fileInput.files = dataTransfer.files;
+
+                fileNameDisplay.textContent = `Selected file: ${fileName}`;
+                fileNameDisplay.style.display = 'block';
+            }
+        }
+
+        document.getElementById('confirm-upload').addEventListener('click', () => {
+            const fileCategory = document.getElementById('file-category').value;
+
+            if (fileInput.files.length === 0) {
+                alert('No file selected. Please select a file to upload.');
+                return;
+            }
+
+            const fileName = fileInput.files[0].name;
+            const uploadDate = new Date().toLocaleDateString();
+            const username = "Current User";
+
+            const resourceTableBody = document.querySelector('#class-resource tbody');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+        <td>${fileName}</td>
+        <td>${username}</td>
+        <td>${fileCategory}</td>
+        <td>${uploadDate}</td>
+    `;
+            resourceTableBody.appendChild(newRow);
+
+            alert('File uploaded successfully!');
+            closeUploadModal();
+        });
+
+        // Cancel upload
+        document.getElementById('cancel-upload').addEventListener('click', closeUploadModal);
+
     </script>
 </body>
+
 </html>
