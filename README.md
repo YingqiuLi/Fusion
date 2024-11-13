@@ -25,7 +25,7 @@ University students often struggle to find course-specific academic support. Soc
 ## Technology Stack
 
 - **Frontend:** HTML, CSS, JavaScript  
-- **Backend:** Node.js, MongoDB  
+- **Backend:** Node.js
 - **Real-Time Features:** Socket.IO/WebSockets
 
 ## Two ways to Run the Project
