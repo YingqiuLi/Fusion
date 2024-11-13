@@ -12,19 +12,15 @@ University students often struggle to find course-specific academic support. Soc
 
 1. **Join Course Groups**  
    Students can search by course name or code and join groups to connect with classmates.  
-   _Task1-HTA.pdf_
 
 2. **Post Questions and Share Resources**  
    Users can ask course-related questions, attach context such as PDFs or screenshots, and categorize their posts for better visibility.  
-   _Task2-HTA.png_
 
 3. **Find Study Partners**  
    The platform helps students find study partners based on shared courses and interests, with future plans for AI recommendations.  
-   _Task3-HTA.pdf_
 
 4. **Respond to Peer Questions**  
    TAs, professors, and alumni can respond to questions, offering valuable insights and fostering an academic support network.  
-   _Task4-HTA.pdf_
 
 ## Technology Stack
 
