@@ -1,0 +1,388 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #83af86;
+    color: white;
+    text-align: center;
+}
+
+h1 {
+    margin-top: 20%;
+}
+
+button {
+    background-color: white;
+    color: #83af86;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+button.disabled {
+    background-color: grey;
+    color: white;
+    cursor: not-allowed;
+}
+
+.container {
+    display: flex;
+    margin-top: 50px;
+}
+
+.input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    margin: 20px auto;
+}
+
+.menu {
+    text-align: left;
+    background-color: #ffffff;
+    color: #83af86;
+    padding: 20px;
+    width: 200px;
+    height: 100vh;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.menu h3 {
+    color: #83af86;
+    font-size: 24px;
+}
+
+.menu ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.menu ul li {
+    margin: 20px 0;
+}
+
+.menu ul li a {
+    text-decoration: none;
+            color: #83af86;
+            font-size: 18px;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+}
+
+.menu ul li a.active {
+    background-color: #83af86;
+    color: white;
+}
+
+.menu ul li a:hover {
+    text-decoration: underline;
+}
+
+
+input[type="text"],
+input[type="password"] {
+    padding: 10px;
+    width: 80%;
+    margin: 10px 0;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.content {
+    margin-top: -150px;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h2 {
+    margin-left: 20px;
+    text-align: left;
+}
+
+.profile-container {
+    display: flex;
+    align-items: center;
+    margin-left: 40px; /* Move profile section right */
+}
+
+.profile-photo-section {
+    position: relative;
+}
+
+#profile-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+.edit-button {
+    position: absolute;
+    bottom: -4px;
+    right: -4px;
+    background-color: transparent;
+    border: none;
+    color: white; /* Icon color */
+    cursor: pointer;
+    font-size: 18px; /* Icon size */
+}
+
+.edit-button i {
+    font-size: 18px;
+}
+
+
+.user-info {
+    margin-left: 20px;
+    text-align: left;
+}
+
+.user-info p {
+    margin: 5px 0;
+}
+
+.course-management {
+    margin-left: 40px; /* Adjust course management */
+    margin-top: 20px;
+    text-align: left;
+}
+
+.course-management-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.course-management ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: left; /* Align courses to the left */
+}
+
+.course-management li {
+    margin: 10px 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.course-management li button {
+    margin-right: 10px; /* Add spacing between "-" button and text */
+}
+
+#save-profile-button {
+    margin-left: 40px;
+    margin-top: 20px;
+    background-color: white;
+    color: #83af86;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.home-menu {
+    text-align: left;
+    background-color: #5e7e60;
+    color: white;
+    padding: 20px;
+    width: 200px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+.home-menu h3 {
+    color: white;
+    font-size: 18px;
+}
+
+.home-menu ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.home-menu ul li {
+    list-style: none;
+    margin: 10px 0;
+}
+
+.home-content {
+    margin-left: 220px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    text-align: center;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+    align-items: center; /* Center align vertically */
+    position: absolute; /* Position relative to the top-right corner */
+    top: 0; /* Align at the very top */
+    right: 0; /* Align to the right edge */
+    padding: 10px 20px; /* Space around the buttons */
+    width: auto; /* Fit content width */
+}
+
+/* Home Page profile icon button*/
+.icon-button {
+    background-color: transparent; 
+    border: 2px solid #5e7e60;
+    border-radius: 50%;
+    color: #5e7e60;
+    font-size: 24px;
+    cursor: pointer;
+    margin-left: 10px;
+    padding: 5px;
+}
+
+.icon-button:hover {
+    background-color: #5e7e60;
+    color: white;
+}
+
+
+.friend-list {
+    margin: 20px;
+    text-align: left;
+}
+
+.friend-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.friend-list li {
+    margin: 10px 0;
+    font-size: 18px;
+    color: white;
+}
+
+.chat-box {
+    position: relative;
+    height: calc(100vh - 140px); /* Adjust height for typing area */
+    width: calc(100% - 40px);
+    left: 80px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background: white;
+    width: calc(100% - 200px); /* Full width minus menu bar width */
+    margin-left: 200px; /* Align with the right edge of the menu */
+    box-sizing: border-box; /* Include padding and border in width */
+}
+
+.chat-message {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+
+.chat-message p.sender-name {
+    font-weight: bold;
+    margin-bottom: 3px;
+    text-align: left;
+}
+
+.chat-message.user {
+    justify-content: flex-end;
+}
+
+.chat-profile {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.sender-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #5e7e60;
+    text-align: left;
+}
+
+.message-bubble {
+    background-color: #83af86;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 90%; /* Restrict width to 80% of container */
+    margin-left: 0;
+    text-align: left;
+    white-space: normal; /* Allow wrapping to the next line if text exceeds one line */
+    word-wrap: break-word; /* Break long words to prevent overflow */
+    overflow-wrap: break-word; /* Ensure compatibility for breaking long words */
+}
+
+.chat-message.user .message-bubble {
+    background-color: #5e7e60;
+}
+
+.class-content-wrapper {
+    margin-left: 220px;
+    width: calc(100% - 220px);
+    padding-top: 20px;
+}
+
+.course-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.course-buttons button {
+    margin: 0 10px;
+}
+
+.chat-box {
+    position: relative;
+    height: calc(100vh - 140px); /* adjust height for typing area */
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background: white;
+    width: calc(100% - 20px);
+    margin-left: -60px; /* moves closer to the menu */
+    gap: 15px;
+}
+
+.chat-input {
+    position: fixed;
+    bottom: 0;
+    width: calc(100% - 240px);
+    left: 240px;
+    background-color: #f1f1f1;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.chat-input input[type="text"] {
+    width: 90%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.chat-input button {
+    margin-left: 10px;
+}
