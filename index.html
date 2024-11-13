@@ -5,110 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fusion</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #83af86;
-            color: white;
-            text-align: center;
-        }
-
-        h1 {
-            margin-top: 20%;
-        }
-
-        button {
-            background-color: white;
-            color: #83af86;
-            border: none;
-            padding: 10px 20px;
-            margin: 10px;
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 5px;
-        }
-
-        button:hover {
-            opacity: 0.8;
-        }
-
-        button.disabled {
-            background-color: grey;
-            color: white;
-            cursor: not-allowed;
-        }
-
-        .container {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 20px;
-        }
-
-        .menu {
-            text-align: left;
-            background-color: #ffffff;
-            color: #83af86;
-            padding: 20px;
-            width: 200px;
-            height: 100vh;
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-
-        .menu h3 {
-            color: #83af86;
-            font-size: 24px;
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        ul li {
-            margin: 20px 0;
-        }
-
-        ul li a {
-            text-decoration: none;
-            color: #83af86;
-            font-size: 18px;
-            display: block;
-            padding: 10px;
-            border-radius: 5px;
-        }
-
-        ul li a.active {
-            background-color: #83af86;
-            color: white;
-        }
-
-        ul li a:hover {
-            text-decoration: underline;
-        }
-
-        input[type="text"],
-        input[type="password"] {
-            padding: 10px;
-            width: 80%;
-            margin: 10px 0;
-            font-size: 16px;
-            box-sizing: border-box;
-        }
-
-        .content {
-            margin-top: 20px;
-            width: 60%;
-            margin-left: auto;
-            margin-right: auto;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
-
     <!-- Welcome Page -->
     <div id="welcome-page" style="display:block;">
         <h1>Welcome to Fusion</h1>
@@ -130,12 +31,13 @@
         </div>
         <div class="content">
             <h2>Signup</h2>
-            <input type="text" placeholder="Enter username">
+            <input type="text" id="signup-username" placeholder="Enter username">
             <input type="password" placeholder="Enter password">
             <input type="password" placeholder="Confirm password">
         </div>
         <button onclick="showPage('institution-page')">Log in</button>
     </div>
+
 
     <!-- Login Page -->
     <div id="login-page" style="display:none;">
@@ -151,19 +53,20 @@
         </div>
         <div class="content">
             <h2>Login</h2>
-            <input type="text" placeholder="Enter username">
+            <input type="text" id="login-username" placeholder="Enter username">
             <input type="password" placeholder="Enter password">
         </div>
         <button onclick="showPage('institution-page')">Confirm</button>
     </div>
+
 
     <!-- Institution Selection Page -->
     <div id="institution-page" style="display:none;">
         <h2>Select Your Institution</h2>
         <div class="input-container">
             <input type="text" id="search-bar" placeholder="Search for your institution..."
-                oninput="filterInstitutions(); resetInstitutionSelection();">
-            <button id="continue-button" class="disabled" disabled onclick="showPage('course-page')">Continue</button>
+                oninput="filterInstitutions();">
+            <button id="continue-button" class="disabled" disabled onclick="captureInstitution()">Continue</button>
         </div>
         <ul id="institution-list"></ul>
     </div>
@@ -173,30 +76,402 @@
         <h2>Select Your Course</h2>
         <div class="input-container">
             <input type="text" id="course-search-bar" placeholder="Search for your course..."
-                oninput="filterCourses(); resetCourseSelection();">
+                oninput="filterCourses();">
         </div>
         <ul id="course-list"></ul>
         <h3>Selected Courses:</h3>
         <ul id="selected-courses-list"></ul>
-        <button id="course-continue-button" class="disabled" disabled>Continue</button>
+        <button id="course-continue-button" class="disabled" disabled
+            onclick="showPage('profile-page')">Continue</button>
     </div>
 
-    <script src="universities.js"></script>
-    <script src="courses.js"></script>
+    <!-- Profile Page -->
+    <div id="profile-page" style="display:none;">
+        <h2>My Account</h2>
+        <div class="profile-container">
+            <div class="profile-photo-section">
+                <img id="profile-photo" src="default_profile.jpg" alt="Default Profile Photo">
+                <button onclick="openPhotoModal()" class="edit-button">
+                    <i class="fas fa-edit"></i> <!-- Add Font Awesome Edit Icon -->
+                </button>
+            </div>
+            <div class="user-info">
+                <p id="profile-username"></p>
+                <p id="profile-institution"></p>
+            </div>
+        </div>
+        <div class="course-management">
+            <h3>Courses</h3>
+            <ul id="profile-courses-list"></ul>
+        </div>
+        <button id="save-profile-button" onclick="saveProfile()">Save</button>
+    </div>
+
+    <!-- Home Page -->
+    <div id="home-page" style="display:none;">
+        <div class="top-bar">
+            <button onclick="showPage('friend-page')" class="icon-button">
+                <i class="fas fa-user-friends"></i> <!-- Friendlist Icon -->
+            </button>
+            <button onclick="showPage('profile-page')" class="icon-button">
+                <i class="fas fa-user"></i> <!-- Profile Icon -->
+            </button>
+        </div>
+
+        <h2>Home</h2>
+        <div class="container">
+            <div class="menu">
+                <h3>Your Courses</h3>
+                <ul id="home-courses-menu"></ul>
+            </div>
+        </div>
+
+        <div class="home-content">
+            <p>Welcome to your dashboard!</p>
+        </div>
+    </div>
+
+
+    <!-- Class Page -->
+    <div id="class-page" style="display:none;">
+        <div class="top-bar">
+            <h2 id="class-title" style="color: white;">Class Name</h2>
+            <button onclick="showPage('friend-page')" class="icon-button">
+                <i class="fas fa-user-friends"></i>
+            </button>
+            <button onclick="showPage('profile-page')" class="icon-button">
+                <i class="fas fa-user"></i>
+            </button>
+        </div>
+
+        <div class="container">
+            <div class="menu">
+                <h3>Your Courses</h3>
+                <ul id="home-courses-menu"></ul>
+            </div>
+
+            <div class="class-content-wrapper">
+                <div class="course-buttons">
+                    <button class="menu-btn" onclick="showClassContent('class-chat')">Chat</button>
+                    <button class="menu-btn" onclick="showClassContent('class-resource')">Resource</button>
+                    <button class="menu-btn" onclick="showClassContent('class-members')">Members</button>
+                </div>
+
+                <!-- Chat Content -->
+                <div id="class-chat" style="display:block;">
+                    <div class="chat-box">
+
+                        <div class="chat-message other">
+                            <img src="emily.jpg" alt="Emily" class="chat-profile">
+                            <div>
+                                <p class="sender-name">Emily</p>
+                                <div class="message-bubble">Hey, did you guys finish the assignment?</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message other">
+                            <img src="jonathan.jpg" alt="Justin" class="chat-profile">
+                            <div>
+                                <p class="sender-name">Jonathan</p>
+                                <div class="message-bubble">Not yet, it's pretty challenging!</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message user">
+                            <div class="message-bubble">I stuck on the third question</div>
+                        </div>
+
+                        <div class="chat-message other">
+                            <img src="xavier.jpg" alt="Xavier" class="chat-profile">
+                            <div>
+                                <p class="sender-name">Xavier</p>
+                                <div class="message-bubble">What assignment?</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message other">
+                            <img src="emily.jpg" alt="Emily" class="chat-profile">
+                            <div>
+                                <p class="sender-name">Emily</p>
+                                <div class="message-bubble">The weekly assignment, released yesterday.</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message other">
+                            <img src="xavier.jpg" alt="Xavier" class="chat-profile">
+                            <div>
+                                <p class="sender-name">Xavier</p>
+                                <div class="message-bubble">Wait what? I thought we're not doing any assignments for this class. I didn't finish any of them</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message other">
+                            <img src="jonathan.jpg" alt="Justin" class="chat-profile">
+                            <div>
+                                <p class="sender-name">Jonathan</p>
+                                <div class="message-bubble">rip</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message other">
+                            <img src="david.jpg" alt="David" class="chat-profile">
+                            <div>
+                                <p class="sender-name">David</p>
+                                <div class="message-bubble">Maybe the prof can give you makeup assignments. Don't stress upon it!</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message other">
+                            <img src="xavier.jpg" alt="Xavier" class="chat-profile">
+                            <div>
+                                <p class="sender-name">Xavier</p>
+                                <div class="message-bubble">I'll try!</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message other">
+                            <img src="emily.jpg" alt="Emily" class="chat-profile">
+                            <div>
+                                <p class="sender-name">Emily</p>
+                                <div class="message-bubble">Anyone wants to compare answers?</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message user">
+                            <div class="message-bubble">Let's discuss it in the next meeting.</div>
+                        </div>
+
+                        <div class="chat-message other">
+                            <img src="emily.jpg" alt="Emily" class="chat-profile">
+                            <div>
+                                <p class="sender-name">Emily</p>
+                                <div class="message-bubble">When shall we meet?</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Other Class Content -->
+                <div id="class-resource" style="display:none;">Resource Page</div>
+                <div id="class-members" style="display:none;">Members Page</div>
+            </div>
+        </div>
+
+        <div class="chat-input">
+            <input type="text" id="chat-message-input" placeholder="Type a message...">
+            <button onclick="sendMessage()" class="icon-button"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+
     <script>
+        let username = "";
+        let institution = "";
+        let selectedCourses = [];
+
         function showPage(pageId) {
             document.querySelectorAll("div[id$='page']").forEach(page => {
                 page.style.display = "none";
             });
             document.getElementById(pageId).style.display = "block";
 
-            if (pageId === 'institution-page') {
-                populateInstitutions();
-            } else if (pageId === 'course-page') {
-                populateCourses();
+            if (pageId === 'login-page') {
+                document.getElementById('login-menu').classList.add('active');
+                document.getElementById('signup-menu').classList.remove('active');
+            } else if (pageId === 'signup-page') {
+                document.getElementById('signup-menu').classList.add('active');
+                document.getElementById('login-menu').classList.remove('active');
+            }
+            if (pageId === 'profile-page') {
+                populateProfile();
+            } else if (pageId === 'home-page' || pageId === 'class-page') {
+                populateHomeMenu();
             }
         }
+
+
+        function captureSignup() {
+            username = document.getElementById('signup-username').value;
+            if (!username) {
+                alert("Please enter a username.");
+                return;
+            }
+            showPage('institution-page');
+        }
+
+        function captureLogin() {
+            username = document.getElementById('login-username').value;
+            if (!username) {
+                alert("Please enter a username.");
+                return;
+            }
+            showPage('institution-page');
+        }
+
+        function captureInstitution() {
+            institution = document.getElementById('search-bar').value;
+            if (!institution) {
+                alert("Please select an institution.");
+                return;
+            }
+            showPage('course-page');
+        }
+
+        function saveProfile() {
+            alert("Profile saved!");
+            showPage('home-page');
+        }
+
+        function populateProfile() {
+            document.getElementById('profile-username').textContent = username || 'Username';
+            document.getElementById('profile-institution').textContent = institution || 'Institution not set';
+
+            const profileCoursesList = document.getElementById('profile-courses-list');
+            profileCoursesList.innerHTML = '';
+
+            if (selectedCourses.length === 0) {
+                profileCoursesList.innerHTML = '<li>No courses selected</li>';
+            } else {
+                selectedCourses.forEach(course => {
+                    const li = document.createElement('li');
+                    li.textContent = course;
+                    const removeButton = document.createElement('button');
+                    removeButton.textContent = "-";
+                    removeButton.onclick = () => {
+                        removeCourse(course);
+                        populateProfile();
+                    };
+                    li.appendChild(removeButton);
+                    profileCoursesList.appendChild(li);
+                });
+            }
+        }
+
+        function populateHomeMenu() {
+            const homeCoursesMenu = document.getElementById('home-courses-menu');
+            homeCoursesMenu.innerHTML = '';
+            selectedCourses.forEach(course => {
+                const li = document.createElement('li');
+                const button = document.createElement('button');
+                button.textContent = course;
+                button.className = 'menu-btn';
+                button.onclick = () => openClassPage(course);
+                li.appendChild(button);
+                homeCoursesMenu.appendChild(li);
+            });
+        }
+
+
+        function removeCourse(course) {
+            selectedCourses = selectedCourses.filter(c => c !== course);
+            populateProfile();
+        }
+
+        function filterInstitutions() {
+            const searchQuery = document.getElementById('search-bar').value.toLowerCase();
+            const institutionList = document.getElementById('institution-list');
+            institutionList.innerHTML = '';
+            ["Northeastern University", "MIT", "Harvard", "Boston University"].forEach(institution => {
+                if (institution.toLowerCase().includes(searchQuery)) {
+                    const li = document.createElement('li');
+                    li.textContent = institution;
+                    li.onclick = () => {
+                        document.getElementById('search-bar').value = institution;
+                        document.getElementById('continue-button').classList.remove('disabled');
+                        document.getElementById('continue-button').disabled = false;
+                    };
+                    institutionList.appendChild(li);
+                }
+            });
+        }
+
+        function filterCourses() {
+            const searchQuery = document.getElementById('course-search-bar').value.toLowerCase();
+            const courseList = document.getElementById('course-list');
+            courseList.innerHTML = '';
+            ["CS 2500: Fundamentals of Computer Science 1",
+                "CS 2510: Fundamentals of Computer Science 2",
+                "CS 3200: Database Design",
+                "CS 3500: Object-Oriented Design",
+                "CS 4800: Algorithms and Data",
+                "CS 4400: Machine Learning"].forEach(course => {
+                    if (course.toLowerCase().includes(searchQuery)) {
+                        const li = document.createElement('li');
+                        li.textContent = course;
+                        li.onclick = () => {
+                            if (!selectedCourses.includes(course)) {
+                                selectedCourses.push(course);
+                                document.getElementById('course-continue-button').classList.remove('disabled');
+                                document.getElementById('course-continue-button').disabled = false;
+                                populateSelectedCourses();
+                            }
+                        };
+                        courseList.appendChild(li);
+                    }
+                });
+        }
+
+        function populateSelectedCourses() {
+            const selectedList = document.getElementById('selected-courses-list');
+            selectedList.innerHTML = '';
+            selectedCourses.forEach(course => {
+                const li = document.createElement('li');
+                li.textContent = course;
+                selectedList.appendChild(li);
+            });
+        }
+
+
+        function openClassPage(courseName) {
+            document.getElementById('class-title').innerText = courseName;
+            populateClassMenu();
+            showPage('class-page');
+        }
+
+        function populateClassMenu() {
+            const classCoursesMenu = document.querySelector('#class-page .menu ul');
+            classCoursesMenu.innerHTML = '';
+            selectedCourses.forEach(course => {
+                const li = document.createElement('li');
+                const button = document.createElement('button');
+                button.textContent = course;
+                button.className = 'menu-btn';
+                button.onclick = () => openClassPage(course);
+                li.appendChild(button);
+                classCoursesMenu.appendChild(li);
+            });
+        }
+
+
+        function showClassContent(contentId) {
+            document.querySelectorAll("#class-page > div[id^='class']").forEach(content => {
+                content.style.display = "none";
+            });
+            document.getElementById(contentId).style.display = "block";
+        }
+
+        function sendMessage() {
+            const messageInput = document.getElementById('chat-message-input');
+            const message = messageInput.value;
+            if (message.trim()) {
+                const chatBox = document.querySelector('.chat-box');
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'chat-message user';
+                messageDiv.innerHTML = `<div class="message-bubble">${message}</div>`;
+                chatBox.appendChild(messageDiv);
+                messageInput.value = '';
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        }
+
+        document.getElementById('chat-message-input').addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                sendMessage();
+            }
+        });
+
     </script>
 </body>
-
 </html>
