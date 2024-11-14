@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Fusion is a web platform designed to address the challenges university students face in connecting with classmates and forming study groups. Unlike traditional social media platforms, Fusion is course-specific, enabling students to join dedicated groups, interact directly with peers, and build meaningful academic relationships. This platform not only fosters collaboration but also provides access to valuable course materials and resources.
+Fusion is a web platform designed to address the challenges university students face in connecting with classmates and forming study groups. Fusion is course-specific, enabling students to join dedicated groups, interact directly with peers, and build meaningful academic relationships. This platform not only fosters collaboration but also provides access to valuable course materials and resources.
 
 ## Problem Statement
 
@@ -26,7 +26,6 @@ University students often struggle to find course-specific academic support. Soc
 
 - **Frontend:** HTML, CSS, JavaScript  
 - **Backend:** Node.js
-- **Real-Time Features:** Socket.IO/WebSockets
 
 ## Two ways to Run the Project
 1. Clone the repository and run in your local computer.
