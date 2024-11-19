@@ -35,7 +35,7 @@
             <input type="password" placeholder="Enter password">
             <input type="password" placeholder="Confirm password">
         </div>
-        <button onclick="showPage('institution-page')">Log in</button>
+        <button onclick="captureSignup()">Signup</button>
     </div>
 
 
@@ -56,7 +56,7 @@
             <input type="text" id="login-username" placeholder="Enter username">
             <input type="password" placeholder="Enter password">
         </div>
-        <button onclick="showPage('institution-page')">Confirm</button>
+        <button onclick="captureLogin()">Login</button>
     </div>
 
 
@@ -92,7 +92,7 @@
             <div class="profile-photo-section">
                 <img id="profile-photo" src="photos/default_profile.jpg" alt="Default Profile Photo">
                 <button onclick="openPhotoModal()" class="edit-button">
-                    <i class="fas fa-edit"></i> <!-- Add Font Awesome Edit Icon -->
+                    <i class="fas fa-edit"></i>
                 </button>
             </div>
             <div class="user-info">
@@ -110,11 +110,17 @@
     <!-- Home Page -->
     <div id="home-page" style="display:none;">
         <div class="top-bar">
+            <button onclick="showPage('post-page')" class="icon-button">
+                <i class="fas fa-rocket"></i> <!-- Post Icon -->
+            </button>
             <button onclick="showPage('friend-page')" class="icon-button">
                 <i class="fas fa-user-friends"></i> <!-- Friendlist Icon -->
             </button>
             <button onclick="showPage('profile-page')" class="icon-button">
-                <i class="fas fa-user"></i> <!-- Profile Icon -->
+                <i class="fas fa-user-secret"></i> <!-- Profile Icon -->
+            </button>
+            <button onclick="showPage('home-page')" class="icon-button">
+                <i class="fas fa-house"></i> <!-- Home Icon -->
             </button>
         </div>
 
@@ -140,7 +146,7 @@
                 <i class="fas fa-user-friends"></i>
             </button>
             <button onclick="showPage('profile-page')" class="icon-button">
-                <i class="fas fa-user"></i>
+                <i class="fas fa-user-secret"></i>
             </button>
         </div>
 
@@ -690,6 +696,10 @@
         // Cancel upload
         document.getElementById('cancel-upload').addEventListener('click', closeUploadModal);
 
+    </script>
+</body>
+
+</html>
     </script>
 </body>
 
