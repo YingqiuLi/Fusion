@@ -535,3 +535,123 @@ h2 {
     font-size: 16px;
     margin-top: 10px;
 }
+
+/* Friendlist Page Container */
+.friend-list-container {
+    margin: 70px auto 20px;
+    padding: 20px;
+    width: 50%;
+    max-width: 800px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    position: relative;
+    left: 25%;
+    transform: translateX(-50%);
+}
+
+/* Friendlist Header */
+.friend-list-container h2 {
+    color: #5e7e60;
+    margin-bottom: 20px;
+}
+
+/* Friendlist Items */
+.friend-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.friend-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.friend-list li:hover {
+    background-color: #e7f4ea;
+}
+
+/* Friend Profile Image */
+.friend-list li img.chat-profile {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* Friend Info */
+.friend-info {
+    flex-grow: 1;
+    margin-left: 10px;
+    color: #5e7e60;
+}
+
+.friend-info p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+/* DM Button */
+.friend-list li button {
+    background-color: #5e7e60;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.friend-list li button:hover {
+    opacity: 0.8;
+}
+
+.friend-list li .delete-button {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.friend-list li .delete-button:hover {
+    opacity: 0.8;
+}
+
+.return-button {
+    position: fixed; /* Stays in the top left corner regardless of scrolling */
+    top: 20px; /* Adjust space from the top */
+    left: 20px; /* Adjust space from the left */
+    background-color: #5e7e60; /* Match top-bar style */
+    color: white; /* White text/icon color */
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    z-index: 1000; /* Ensure it's above all other elements */
+}
+
+.return-button:hover {
+    opacity: 0.8; /* Hover effect */
+}
