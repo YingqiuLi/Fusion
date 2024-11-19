@@ -25,7 +25,6 @@ University students often struggle to find course-specific academic support. Soc
 ## Technology Stack
 
 - **Frontend:** HTML, CSS, JavaScript  
-- **Backend:** Node.js
 
 ## Two ways to Run the Project
 1. Clone the repository and run in your local computer.
