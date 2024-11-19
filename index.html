@@ -113,11 +113,14 @@
             <button onclick="showPage('post-page')" class="icon-button">
                 <i class="fas fa-rocket"></i> <!-- Post Icon -->
             </button>
-            <button onclick="showPage('friend-page')" class="icon-button">
+            <button onclick="showPage('message-page')" class="icon-button">
+                <i class="fas fa-envelope"></i> <!-- Message Icon -->
+            </button>
+            <button onclick="showPage('friendlist-page')" class="icon-button">
                 <i class="fas fa-user-friends"></i> <!-- Friendlist Icon -->
             </button>
             <button onclick="showPage('profile-page')" class="icon-button">
-                <i class="fas fa-user-secret"></i> <!-- Profile Icon -->
+                <i class="fas fa-user"></i> <!-- Profile Icon -->
             </button>
             <button onclick="showPage('home-page')" class="icon-button">
                 <i class="fas fa-house"></i> <!-- Home Icon -->
@@ -141,12 +144,20 @@
     <!-- Class Page -->
     <div id="class-page" style="display:none;">
         <div class="top-bar">
-            <h2 id="class-title" style="color: white;">Class Name</h2>
-            <button onclick="showPage('friend-page')" class="icon-button">
-                <i class="fas fa-user-friends"></i>
+            <button onclick="showPage('post-page')" class="icon-button">
+                <i class="fas fa-rocket"></i> <!-- Post Icon -->
+            </button>
+            <button onclick="showPage('message-page')" class="icon-button">
+                <i class="fas fa-envelope"></i> <!-- Message Icon -->
+            </button>
+            <button onclick="showPage('friendlist-page')" class="icon-button">
+                <i class="fas fa-user-friends"></i> <!-- Friendlist Icon -->
             </button>
             <button onclick="showPage('profile-page')" class="icon-button">
-                <i class="fas fa-user-secret"></i>
+                <i class="fas fa-user"></i> <!-- Profile Icon -->
+            </button>
+            <button onclick="showPage('home-page')" class="icon-button">
+                <i class="fas fa-house"></i> <!-- Home Icon -->
             </button>
         </div>
 
@@ -385,6 +396,80 @@
         </div>
     </div>
 
+    <!-- Friendlist Page -->
+    <div id="friendlist-page" style="display:none;">
+        <button id="return" onclick="goBack()" class="icon-button">
+            <i class="fas fa-arrow-left"></i> <!-- Return Icon -->
+        </button>
+
+        <div class="top-bar">
+            <button onclick="showPage('post-page')" class="icon-button">
+                <i class="fas fa-rocket"></i>
+            </button>
+            <button onclick="showPage('message-page')" class="icon-button">
+                <i class="fas fa-envelope"></i>
+            </button>
+            <button onclick="showPage('friendlist-page')" class="icon-button">
+                <i class="fas fa-user-friends"></i>
+            </button>
+            <button onclick="showPage('profile-page')" class="icon-button">
+                <i class="fas fa-user"></i>
+            </button>
+            <button onclick="showPage('home-page')" class="icon-button">
+                <i class="fas fa-house"></i>
+            </button>
+        </div>
+
+        <div class="friend-list-container">
+            <h2>Friend List</h2>
+            <ul class="friend-list">
+                <li>
+                    <img src="photos/emily.jpg" alt="Emily" class="chat-profile">
+                    <div class="friend-info">
+                        <p><strong>Emily Johnson</strong></p>
+                        <p>Last Active: 2h ago</p>
+                        <p>Mutual Courses: CS 3500</p>
+                    </div>
+                    <button class="delete-button" onclick="deleteFriend(this)">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    <button class="icon-button" onclick="viewProfile('Emily Johnson')"><i
+                            class="fas fa-user"></i></button>
+                    <button class="icon-button"><i class="fas fa-envelope"></i></button>
+                </li>
+                <li>
+                    <img src="photos/xavier.jpg" alt="Xavier" class="chat-profile">
+                    <div class="friend-info">
+                        <p><strong>Xavier Williams</strong></p>
+                        <p>Last Active: 1h ago</p>
+                        <p>Mutual Courses: CS 2500</p>
+                    </div>
+                    <button class="delete-button" onclick="deleteFriend(this)">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    <button class="icon-button" onclick="viewProfile('Xavier Williams')"><i
+                            class="fas fa-user"></i></button>
+                    <button class="icon-button"><i class="fas fa-envelope"></i></button>
+                </li>
+                <li>
+                    <img src="photos/david.jpg" alt="David" class="chat-profile">
+                    <div class="friend-info">
+                        <p><strong>David Brown</strong></p>
+                        <p>Last Active: 5m ago</p>
+                        <p>Mutual Courses: CS 4400</p>
+                    </div>
+                    <button class="delete-button" onclick="deleteFriend(this)">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    <button class="icon-button" onclick="viewProfile('David Brown')"><i
+                            class="fas fa-user"></i></button>
+                    <button class="icon-button"><i class="fas fa-envelope"></i></button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
 
     <script>
         let username = "";
@@ -584,7 +669,6 @@
                 messageDiv.innerHTML = `<div class="message-bubble">${message}</div>`;
                 chatBox.appendChild(messageDiv);
 
-                // Clear the input field
                 messageInput.value = '';
 
                 // Scroll to the latest message
@@ -667,6 +751,32 @@
             }
         }
 
+        function viewProfile(friendName) {
+            alert(`Viewing profile of ${friendName}`);
+            // Logic to navigate to the friend's profile
+        }
+
+        function deleteFriend(button) {
+            if (confirm("Are you sure you want to delete this friend?")) {
+                const friendItem = button.closest('li');
+                friendItem.remove();
+
+                const friendList = document.querySelector('.friend-list');
+                if (friendList.children.length === 0) {
+                    showNoFriendsMessage();
+                }
+            }
+        }
+
+        function showNoFriendsMessage() {
+            const friendListContainer = document.querySelector('.friend-list-container');
+            friendListContainer.innerHTML = `
+        <h2>Friend List</h2>
+        <p style="color: #5e7e60; text-align: center;">You have no friends yet. Add some to see them here!</p>
+    `;
+        }
+
+
         document.getElementById('confirm-upload').addEventListener('click', () => {
             const fileCategory = document.getElementById('file-category').value;
 
@@ -696,10 +806,6 @@
         // Cancel upload
         document.getElementById('cancel-upload').addEventListener('click', closeUploadModal);
 
-    </script>
-</body>
-
-</html>
     </script>
 </body>
 
