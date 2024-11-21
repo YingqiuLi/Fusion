@@ -107,11 +107,32 @@
         <button id="save-profile-button" onclick="saveProfile()">Save</button>
     </div>
 
+    <!-- Friend Request Area -->
+    <div id="friend-request-area" style="display: none;" class="friend-request-area">
+        <button class="close-button" onclick="closeFriendRequestArea()">
+            <i class="fas fa-times"></i>
+        </button>
+        <h3>Friend Requests</h3>
+        <ul id="friend-request-list" class="friend-request-list">
+            <li>
+                <img src="photos/Erica.jpg" alt="Erica" class="friend-request-photo">
+                <span class="friend-request-name">Erica</span>
+                <button class="accept-button" onclick="acceptRequest('Erica')">
+                    <i class="fas fa-check"></i>
+                </button>
+                <button class="reject-button" onclick="rejectRequest('Erica')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </li>
+        </ul>
+    </div>
+
     <!-- Home Page -->
     <div id="home-page" style="display:none;">
         <div class="top-bar">
-            <button onclick="showPage('message-page')" class="icon-button">
+            <button onclick="toggleFriendRequestArea()" class="icon-button">
                 <i class="fas fa-envelope"></i> <!-- Message Icon -->
+                <span id="red-dot" class="red-dot"></span>
             </button>
             <button onclick="showPage('friendlist-page')" class="icon-button">
                 <i class="fas fa-user-friends"></i> <!-- Friendlist Icon -->
@@ -142,7 +163,7 @@
     <div id="class-page" style="display:none;">
         <div class="top-bar">
             <h2 id="class-title" style="color: white;">Class Name</h2>
-            <button onclick="showPage('message-page')" class="icon-button">
+            <button onclick="toggleFriendRequestArea()" class="icon-button">
                 <i class="fas fa-envelope"></i> <!-- Message Icon -->
             </button>
             <button onclick="showPage('friendlist-page')" class="icon-button">
@@ -394,7 +415,7 @@
     <!-- Friendlist Page -->
     <div id="friendlist-page" style="display:none;">
         <div class="top-bar">
-            <button onclick="showPage('message-page')" class="icon-button">
+            <button onclick="toggleFriendRequestArea()" class="icon-button">
                 <i class="fas fa-envelope"></i> <!-- Message Icon -->
             </button>
             <button onclick="showPage('friendlist-page')" class="icon-button">
@@ -411,48 +432,163 @@
             <h2>Friend List</h2>
             <ul class="friend-list">
                 <li>
-                    <img src="photos/emily.jpg" alt="Emily" class="chat-profile">
+                    <img src="photos/emily.jpg" alt="Emily" class="chat-profile"
+                        onclick="showOtherProfile('Emily Johnson', '@emily_johnson', 'Class of 2024', 'Computer Science', ['CS 3500'], 'photos/emily.jpg')">
                     <div class="friend-info">
-                        <p><strong>Emily Johnson</strong></p>
+                        <p><span
+                                onclick="showOtherProfile('Emily Johnson', '@emily_johnson', 'Class of 2024', 'Computer Science', ['CS 3500'], 'photos/emily.jpg')">
+                                <strong>Emily Johnson</strong>
+                            </span></p>
                         <p>Last Active: 2h ago</p>
                         <p>Mutual Courses: CS 3500</p>
                     </div>
                     <button class="delete-button" onclick="deleteFriend(this)">
                         <i class="fas fa-trash"></i>
                     </button>
-                    <button class="icon-button" onclick="viewProfile('Emily Johnson')"><i
-                            class="fas fa-user"></i></button>
-                    <button class="icon-button"><i class="fas fa-envelope"></i></button>
+                    <button class="icon-button"
+                        onclick="showOtherProfile('Emily Johnson', '@emily_johnson', 'Class of 2024', 'Computer Science', ['CS 3500'], 'photos/emily.jpg')">
+                        <i class="fas fa-user"></i>
+                    </button>
+                    <button class="icon-button" onclick="openDmArea('Emily Johnson', 'photos/emily.jpg')">
+                        <i class="fas fa-envelope"></i>
+                    </button>
                 </li>
+
                 <li>
-                    <img src="photos/xavier.jpg" alt="Xavier" class="chat-profile">
+                    <img src="photos/xavier.jpg" alt="Xavier" class="chat-profile"
+                        onclick="showOtherProfile('Xavier Williams', '@xavier_williams', 'Class of 2025', 'Mathematics', ['CS 2500'], 'photos/xavier.jpg')">
                     <div class="friend-info">
-                        <p><strong>Xavier Williams</strong></p>
+                        <p>
+                            <span
+                                onclick="showOtherProfile('Xavier Williams', '@xavier_williams', 'Class of 2025', 'Mathematics', ['CS 2500'], 'photos/xavier.jpg')">
+                                <strong>Xavier Williams</strong>
+                            </span>
+                        </p>
                         <p>Last Active: 1h ago</p>
                         <p>Mutual Courses: CS 2500</p>
                     </div>
                     <button class="delete-button" onclick="deleteFriend(this)">
                         <i class="fas fa-trash"></i>
                     </button>
-                    <button class="icon-button" onclick="viewProfile('Xavier Williams')"><i
-                            class="fas fa-user"></i></button>
-                    <button class="icon-button"><i class="fas fa-envelope"></i></button>
+                    <button class="icon-button"
+                        onclick="showOtherProfile('Xavier Williams', '@xavier_williams', 'Class of 2025', 'Mathematics', ['CS 2500'], 'photos/xavier.jpg')">
+                        <i class="fas fa-user"></i>
+                    </button>
+                    <button class="icon-button" onclick="openDmArea('Xavier Williams', 'photos/xavier.jpg')">
+                        <i class="fas fa-envelope"></i>
+                    </button>
                 </li>
                 <li>
-                    <img src="photos/david.jpg" alt="David" class="chat-profile">
+                    <img src="photos/david.jpg" alt="David" class="chat-profile"
+                        onclick="showOtherProfile('David Brown', '@david_brown', 'Class of 2023', 'Comuter Science and Physics', ['CS 4400'], 'photos/david.jpg')">
                     <div class="friend-info">
-                        <p><strong>David Brown</strong></p>
+                        <p>
+                            <span
+                                onclick="showOtherProfile('David Brown', '@david_brown', 'Class of 2023', 'Comuter Science and Physics', ['CS 4400'], 'photos/david.jpg')">
+                                <strong>David Brown</strong>
+                            </span>
+                        </p>
                         <p>Last Active: 5m ago</p>
                         <p>Mutual Courses: CS 4400</p>
                     </div>
                     <button class="delete-button" onclick="deleteFriend(this)">
                         <i class="fas fa-trash"></i>
                     </button>
-                    <button class="icon-button" onclick="viewProfile('David Brown')"><i
-                            class="fas fa-user"></i></button>
-                    <button class="icon-button"><i class="fas fa-envelope"></i></button>
+                    <button class="icon-button"
+                        onclick="showOtherProfile('David Brown', '@david_brown', 'Class of 2023', 'Computer Science and Physics', ['CS 4400'], 'photos/david.jpg')">
+                        <i class="fas fa-user"></i>
+                    </button>
+                    <button class="icon-button" onclick="openDmArea('David Brown', 'photos/david.jpg')">
+                        <i class="fas fa-envelope"></i>
+                    </button>
+                </li>
+
+                <li>
+                    <img src="photos/erica.jpg" alt="Erica" class="chat-profile"
+                        onclick="showOtherProfile('Erica Chen', '@erica_chen', 'Class of 2026', 'Biology', ['CS 2510'], 'photos/erica.jpg')">
+                    <div class="friend-info">
+                        <p>
+                            <span
+                                onclick="showOtherProfile('Erica Chen', '@erica_chen', 'Class of 2026', 'Biology', ['CS 2510'], 'photos/erica.jpg')">
+                                <strong>Erica Chen</strong>
+                            </span>
+                        </p>
+                        <p>Last Active: 10m ago</p>
+                        <p>Mutual Courses: CS 2510</p>
+                    </div>
+                    <button class="delete-button" onclick="deleteFriend(this)">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    <button class="icon-button"
+                        onclick="showOtherProfile('Erica Chen', '@erica_chen', 'Class of 2026', 'Biology', ['CS 2510'], 'photos/erica.jpg')">
+                        <i class="fas fa-user"></i>
+                    </button>
+                    <button class="icon-button" onclick="openDmArea('Erica Chen', 'photos/erica.jpg')">
+                        <i class="fas fa-envelope"></i>
+                    </button>
+                </li>
+                <!-- Anna -->
+                <li>
+                    <img src="photos/anna.jpg" alt="Anna" class="chat-profile"
+                        onclick="showOtherProfile('Anna Smith', '@anna_smith', 'Class of 2027', 'Chemistry', ['CS 3200'], 'photos/anna.jpg')">
+                    <div class="friend-info">
+                        <p>
+                            <span
+                                onclick="showOtherProfile('Anna Smith', '@anna_smith', 'Class of 2027', 'Chemistry', ['CS 3200'], 'photos/anna.jpg')">
+                                <strong>Anna Smith</strong>
+                            </span>
+                        </p>
+                        <p>Last Active: 15m ago</p>
+                        <p>Mutual Courses: CS 3200</p>
+                    </div>
+                    <button class="delete-button" onclick="deleteFriend(this)">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    <button class="icon-button"
+                        onclick="showOtherProfile('Anna Smith', '@anna_smith', 'Class of 2027', 'Chemistry', ['CS 3200'], 'photos/anna.jpg')">
+                        <i class="fas fa-user"></i>
+                    </button>
+                    <button class="icon-button" onclick="openDmArea('Anna Smith', 'photos/anna.jpg')">
+                        <i class="fas fa-envelope"></i>
+                    </button>
                 </li>
             </ul>
+        </div>
+    </div>
+
+    <!-- Other Profile Area -->
+    <div id="other-profile-area" class="other-profile-area" style="display: none;">
+        <button class="close-button" onclick="closeOtherProfile()">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="profile-content">
+            <img id="other-profile-photo" src="" alt="Profile Photo" class="profile-photo-large">
+            <h3 id="other-profile-name"></h3>
+            <p id="other-profile-username"></p>
+            <p id="other-profile-graduation"></p>
+            <p id="other-profile-major"></p>
+            <h4>Mutual Courses</h4>
+            <ul id="other-profile-courses"></ul>
+        </div>
+        <div class="profile-buttons">
+            <button onclick="deleteFriend(this)">Delete</button>
+            <button class="icon-button dm-button"><i class="fas fa-envelope"></i> DM</button>
+        </div>
+    </div>
+
+    <!-- DM Area -->
+    <div id="dm-area" class="dm-area" style="display: none;">
+        <div class="dm-header" draggable="true" id="dm-header">
+            <img id="dm-profile-photo" src="photos/emily.jpg" alt="Profile Photo" class="dm-profile-photo">
+            <h3 id="dm-title">Direct Message - Emily Johnson</h3>
+            <button class="close-button" onclick="closeDmArea()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="dm-messages" id="dm-messages"></div>
+        <div class="dm-input-area">
+            <input type="text" id="dm-input" placeholder="Type a message...">
+            <button onclick="sendDmMessage()"><i class="fas fa-paper-plane"></i></button>
         </div>
     </div>
 
@@ -538,6 +674,136 @@
                     profileCoursesList.appendChild(li);
                 });
             }
+        }
+
+        let friendRequests = [
+            { name: "Erica", photo: "photos/erica.jpg" },
+            { name: "Anna", photo: "photos/anna.jpg" },
+        ];
+
+        function toggleFriendRequestArea() {
+            const friendRequestArea = document.getElementById("friend-request-area");
+            const redDot = document.getElementById("red-dot");
+
+            // Toggle visibility of the friend request area
+            if (friendRequestArea.style.display === "none") {
+                friendRequestArea.style.display = "block";
+                redDot.style.display = "none"; // Remove the red dot once clicked
+                populateFriendRequests();
+            } else {
+                friendRequestArea.style.display = "none";
+            }
+        }
+
+        function populateFriendRequests() {
+            const requestList = document.getElementById("friend-request-list");
+            requestList.innerHTML = ""; // Clear existing content
+
+            friendRequests.forEach(request => {
+                const li = document.createElement("li");
+
+                // Add profile photo
+                const img = document.createElement("img");
+                img.src = request.photo;
+                img.alt = request.name;
+                img.className = "friend-request-photo";
+
+                // Add name
+                const nameSpan = document.createElement("span");
+                nameSpan.textContent = request.name;
+                nameSpan.className = "friend-request-name";
+
+                // Add accept button
+                const acceptButton = document.createElement("button");
+                acceptButton.className = "accept-button";
+                acceptButton.innerHTML = '<i class="fas fa-check"></i>';
+                acceptButton.onclick = () => acceptRequest(request.name);
+
+                // Add reject button
+                const rejectButton = document.createElement("button");
+                rejectButton.className = "reject-button";
+                rejectButton.innerHTML = '<i class="fas fa-times"></i>';
+                rejectButton.onclick = () => rejectRequest(request.name);
+
+                li.appendChild(img);
+                li.appendChild(nameSpan);
+                li.appendChild(acceptButton);
+                li.appendChild(rejectButton);
+
+                requestList.appendChild(li);
+            });
+        }
+
+        function acceptRequest(name) {
+            const acceptedRequest = friendRequests.find(request => request.name === name);
+
+            if (acceptedRequest) {
+                // Add to friend list
+                const friendList = document.querySelector('.friend-list');
+                const li = document.createElement('li');
+
+                const img = document.createElement('img');
+                img.src = acceptedRequest.photo;
+                img.alt = acceptedRequest.name;
+                img.className = 'chat-profile';
+
+                const friendInfo = document.createElement('div');
+                friendInfo.className = 'friend-info';
+
+                const nameParagraph = document.createElement('p');
+                nameParagraph.innerHTML = `<strong>${acceptedRequest.name}</strong>`;
+                friendInfo.appendChild(nameParagraph);
+
+                const mutualCoursesParagraph = document.createElement('p');
+                mutualCoursesParagraph.textContent = "Mutual Courses: CS 3500"; // Example, can be dynamic
+                friendInfo.appendChild(mutualCoursesParagraph);
+
+                const lastActiveParagraph = document.createElement('p');
+                lastActiveParagraph.textContent = "Last Active: Just now"; // Example
+                friendInfo.appendChild(lastActiveParagraph);
+
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'delete-button';
+                deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
+                deleteButton.onclick = () => li.remove();
+
+                // Profile button
+                const profileButton = document.createElement('button');
+                profileButton.className = 'icon-button';
+                profileButton.innerHTML = '<i class="fas fa-user"></i>';
+                profileButton.onclick = () => showOtherProfile(acceptedRequest.name, acceptedRequest.username, acceptedRequest.graduation, acceptedRequest.major, acceptedRequest.mutualCourses, acceptedRequest.photo);
+
+                // DM button
+                const dmButton = document.createElement('button');
+                dmButton.className = 'icon-button';
+                dmButton.innerHTML = '<i class="fas fa-envelope"></i>';
+                dmButton.onclick = () => alert(`Sending a DM to ${acceptedRequest.name}`);
+
+                li.appendChild(img);
+                li.appendChild(friendInfo);
+                li.appendChild(deleteButton);
+                li.appendChild(profileButton);
+                li.appendChild(dmButton);
+                friendList.appendChild(li);
+
+                // Remove request
+                friendRequests = friendRequests.filter(request => request.name !== name);
+                populateFriendRequests();
+                alert(`You are now friends with ${name}.`);
+            }
+        }
+
+
+        function rejectRequest(name) {
+            alert(`You have rejected ${name}'s friend request.`);
+            friendRequests = friendRequests.filter(request => request.name !== name);
+            populateFriendRequests();
+        }
+
+
+        function closeFriendRequestArea() {
+            const friendRequestArea = document.getElementById("friend-request-area");
+            friendRequestArea.style.display = "none";
         }
 
         function populateHomeMenu() {
@@ -742,6 +1008,7 @@
             alert(`Viewing profile of ${friendName}`);
             // Logic to navigate to the friend's profile
         }
+
         function deleteFriend(button) {
             if (confirm("Are you sure you want to delete this friend?")) {
                 const friendItem = button.closest('li');
@@ -752,12 +1019,81 @@
                 }
             }
         }
+
         function showNoFriendsMessage() {
             const friendListContainer = document.querySelector('.friend-list-container');
             friendListContainer.innerHTML = `
         <h2>Friend List</h2>
         <p style="color: #5e7e60; text-align: center;">You have no friends yet. Add some to see them here!</p>
     `;
+        }
+
+        function showOtherProfile(name, username, graduation, major, mutualCourses, photo) {
+            const profileArea = document.getElementById("other-profile-area");
+            profileArea.style.display = "block";
+
+            document.getElementById("other-profile-name").textContent = name;
+            document.getElementById("other-profile-username").textContent = username;
+            document.getElementById("other-profile-graduation").textContent = graduation;
+            document.getElementById("other-profile-major").textContent = major;
+
+            const profilePhoto = document.getElementById("other-profile-photo");
+            profilePhoto.src = photo;
+
+            const courseList = document.getElementById("other-profile-courses");
+            courseList.innerHTML = "";
+            mutualCourses.forEach(course => {
+                const li = document.createElement("li");
+                li.textContent = course;
+                courseList.appendChild(li);
+            });
+
+            const dmButton = profileArea.querySelector(".dm-button");
+            dmButton.onclick = () => openDmArea(name, photo);
+        }
+
+        function closeOtherProfile() {
+            document.getElementById("other-profile-area").style.display = "none";
+        }
+
+        function openDmArea(name, photo) {
+            const dmArea = document.getElementById("dm-area");
+            const dmTitle = document.getElementById("dm-title");
+            const dmPhoto = document.getElementById("dm-profile-photo");
+            const dmMessages = document.getElementById("dm-messages");
+
+            dmTitle.textContent = `Direct Message - ${name}`;
+            dmPhoto.src = photo;
+            dmArea.style.display = "block";
+            dmMessages.innerHTML = "";
+        }
+
+        function closeDmArea() {
+            document.getElementById("dm-area").style.display = "none";
+        }
+
+        function sendDmMessage() {
+            const dmInput = document.getElementById("dm-input");
+            const message = dmInput.value.trim();
+            const dmMessages = document.getElementById("dm-messages");
+
+            if (message) {
+                const userBubble = document.createElement("div");
+                userBubble.className = "message-bubble right";
+                userBubble.textContent = message;
+                dmMessages.appendChild(userBubble);
+                // Scroll to the bottom
+                dmMessages.scrollTop = dmMessages.scrollHeight;
+                dmInput.value = "";
+
+                setTimeout(() => {
+                    const responseBubble = document.createElement("div");
+                    responseBubble.className = "message-bubble left";
+                    responseBubble.textContent = "Thanks for your message!";
+                    dmMessages.appendChild(responseBubble);
+                    dmMessages.scrollTop = dmMessages.scrollHeight;
+                }, 1000);
+            }
         }
 
 
@@ -785,6 +1121,13 @@
 
             alert('File uploaded successfully!');
             closeUploadModal();
+        });
+
+        document.getElementById("dm-input").addEventListener("keypress", (event) => {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                sendDmMessage();
+            }
         });
 
         // Cancel upload
