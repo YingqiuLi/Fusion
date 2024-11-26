@@ -313,7 +313,12 @@
                                 </tr>
                                 <tr>
                                     <td>Midterm Exam Answers2022.pdf</td>
-                                    <td>David Brown</td>
+                                    <td>David Brown
+                                        <button class="star-btn" onclick="showTAInfo(event)"
+                                            style="background: none; border: none; cursor: pointer;">
+                                            <i class="fas fa-star" style="color: yellow;"></i>
+                                        </button>
+                                    </td>
                                     <td>Answer</td>
                                     <td>10/25/2022</td>
                                 </tr>
@@ -665,7 +670,8 @@
                     const li = document.createElement('li');
                     li.textContent = course;
                     const removeButton = document.createElement('button');
-                    removeButton.textContent = "-";
+                    removeButton.className = 'delete-button';
+                    removeButton.innerHTML = '<i class="fas fa-trash"></i>';
                     removeButton.onclick = () => {
                         removeCourse(course);
                         populateProfile();
@@ -1096,6 +1102,40 @@
             }
         }
 
+        function showTAInfo(event) {
+            // Remove any existing TA info boxes
+            const existingInfo = document.querySelector(".ta-info");
+            if (existingInfo) existingInfo.remove();
+
+            // Create a new TA info box
+            const infoBox = document.createElement("div");
+            infoBox.className = "ta-info";
+            infoBox.textContent = "This user is assigned as a Teaching Assistant.";
+
+            // Style the TA info box
+            infoBox.style.position = "absolute";
+            infoBox.style.backgroundColor = "white";
+            infoBox.style.border = "2px solid #83af86";
+            infoBox.style.color = "#83af86";
+            infoBox.style.padding = "10px";
+            infoBox.style.borderRadius = "5px";
+            infoBox.style.boxShadow = "0px 4px 6px rgba(0, 0, 0, 0.1)";
+            infoBox.style.zIndex = "1000";
+            infoBox.style.whiteSpace = "nowrap";
+
+            // Position the info box near the clicked star button
+            const rect = event.target.getBoundingClientRect();
+            infoBox.style.top = `${window.scrollY + rect.top - 40}px`;
+            infoBox.style.left = `${window.scrollX + rect.left}px`;
+
+            // Add the info box to the document
+            document.body.appendChild(infoBox);
+
+            // Remove the info box after 3 seconds
+            setTimeout(() => {
+                infoBox.remove();
+            }, 3000);
+        }
 
         document.getElementById('confirm-upload').addEventListener('click', () => {
             const fileCategory = document.getElementById('file-category').value;
