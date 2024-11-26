@@ -117,6 +117,12 @@ h2 {
     margin-left: 40px; /* Move profile section right */
 }
 
+.profile-container .delete-button {
+    padding: 5px 8px;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
 .profile-photo-section {
     position: relative;
 }
@@ -940,4 +946,9 @@ h2 {
 
 .dm-input-area button:hover {
     opacity: 0.8;
+}
+
+.ta-info {
+    font-size: 12px;
+    text-align: center;
 }
