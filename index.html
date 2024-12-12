@@ -72,18 +72,24 @@
     </div>
 
     <!-- Course Selection Page -->
-    <div id="course-page" style="display:none;">
+    <div id="course-page" style="display: none;">
         <h2>Select Your Course</h2>
         <div class="input-container">
             <input type="text" id="course-search-bar" placeholder="Search for your course..."
                 oninput="filterCourses();">
+            <button id="course-continue-button" class="disabled" disabled
+                onclick="showPage('profile-page')">Continue</button>
         </div>
         <ul id="course-list"></ul>
-        <h3>Selected Courses:</h3>
-        <ul id="selected-courses-list"></ul>
-        <button id="course-continue-button" class="disabled" disabled
-            onclick="showPage('profile-page')">Continue</button>
+
+        <!-- Fixed Selected Courses List -->
+        <div id="selected-courses-list" style="display: none;">
+            <h3>Selected Courses:</h3>
+            <ul></ul>
+        </div>
     </div>
+
+
 
     <!-- Profile Page -->
     <div id="profile-page" style="display:none;">
@@ -604,10 +610,25 @@
         let selectedCourses = [];
 
         function showPage(pageId) {
-            document.querySelectorAll("div[id$='page']").forEach(page => {
+            document.querySelectorAll("div[id$='-page']").forEach(page => {
                 page.style.display = "none";
             });
-            document.getElementById(pageId).style.display = "block";
+
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.style.display = "block";
+            }
+
+            if (pageId === 'course-page') {
+                document.getElementById('selected-courses-list').style.display = 'block'; // Show fixed course list
+            } else {
+                document.getElementById('selected-courses-list').style.display = 'none'; // Hide it on other pages
+            }
+
+            if (pageId === 'institution-page') {
+                document.getElementById('continue-button').classList.add('disabled'); // Reset the button state
+                document.getElementById('continue-button').disabled = true;
+            }
 
             if (pageId === 'login-page') {
                 document.getElementById('login-menu').classList.add('active');
@@ -832,23 +853,80 @@
             populateProfile();
         }
 
+        // function filterInstitutions() {
+        //     const searchQuery = document.getElementById('search-bar').value.toLowerCase();
+        //     const institutionList = document.getElementById('institution-list');
+        //     institutionList.innerHTML = '';
+        //     ["Northeastern University", "MIT", "Harvard", "Boston University"].forEach(institution => {
+        //         if (institution.toLowerCase().includes(searchQuery)) {
+        //             const li = document.createElement('li');
+        //             li.textContent = institution;
+        //             li.onclick = () => {
+        //                 document.getElementById('search-bar').value = institution;
+        //                 document.getElementById('continue-button').classList.remove('disabled');
+        //                 document.getElementById('continue-button').disabled = false;
+        //             };
+        //             institutionList.appendChild(li);
+        //         }
+        //     });
+        // }
+
         function filterInstitutions() {
             const searchQuery = document.getElementById('search-bar').value.toLowerCase();
             const institutionList = document.getElementById('institution-list');
-            institutionList.innerHTML = '';
-            ["Northeastern University", "MIT", "Harvard", "Boston University"].forEach(institution => {
+            institutionList.innerHTML = ''; // Clear previous results
+
+            const institutions = [
+                "Northeastern University",
+                "MIT",
+                "Harvard",
+                "Boston University"
+            ];
+
+            institutions.forEach(institution => {
                 if (institution.toLowerCase().includes(searchQuery)) {
+                    // Create a list item for matching institutions
                     const li = document.createElement('li');
                     li.textContent = institution;
+
+                    // Apply styling for visibility
+                    li.style.backgroundColor = 'white';
+                    li.style.color = '#5e7e60';
+                    li.style.padding = '10px';
+                    li.style.margin = '5px';
+                    li.style.borderRadius = '5px';
+                    li.style.cursor = 'pointer';
+
+                    // Add hover effect
+                    li.onmouseover = () => li.style.backgroundColor = '#e7f4ea';
+                    li.onmouseout = () => li.style.backgroundColor = 'white';
+
+                    // Add click event to select the institution
                     li.onclick = () => {
                         document.getElementById('search-bar').value = institution;
-                        document.getElementById('continue-button').classList.remove('disabled');
-                        document.getElementById('continue-button').disabled = false;
+                        const continueButton = document.getElementById('continue-button');
+                        continueButton.classList.remove('disabled');
+                        continueButton.disabled = false;
                     };
+
+                    // Append the item to the list
                     institutionList.appendChild(li);
                 }
             });
+
+            // If no matches found
+            if (institutionList.innerHTML === '') {
+                const li = document.createElement('li');
+                li.textContent = 'No results found';
+                li.style.backgroundColor = 'white';
+                li.style.color = 'red';
+                li.style.padding = '10px';
+                li.style.margin = '5px';
+                li.style.borderRadius = '5px';
+                institutionList.appendChild(li);
+            }
         }
+
 
         function filterCourses() {
             const searchQuery = document.getElementById('course-search-bar').value.toLowerCase();
