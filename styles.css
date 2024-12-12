@@ -952,3 +952,53 @@ h2 {
     font-size: 12px;
     text-align: center;
 }
+
+#institution-list li {
+    background-color: white; /* White background for visibility */
+    color: #5e7e60; /* Contrast text color */
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#institution-list li:hover {
+    background-color: #e7f4ea; /* Slight highlight on hover */
+}
+
+#course-list li {
+    background-color: white; /* White background for visibility */
+    color: #5e7e60; /* Contrast text color */
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#course-list li:hover {
+    background-color: #e7f4ea; /* Slight highlight on hover */
+}
+
+#selected-courses-list {
+    display: none; /* Hide by default */
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    color: #5e7e60;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 600px;
+    z-index: 1000;
+}
+
+
+#selected-courses-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
